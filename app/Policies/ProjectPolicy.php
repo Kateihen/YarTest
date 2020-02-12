@@ -65,7 +65,7 @@ class ProjectPolicy
      */
     public function delete(User $user, Project $project)
     {
-        //
+        return $project->creator == $user->name;
     }
 
     /**

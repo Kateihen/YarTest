@@ -12,6 +12,16 @@
         @yield('content')
     </div>
 
+    @if(Auth::check())
+        <div>
+            <form action="/logout" method="POST">
+                @csrf
+                <button value="submit">Logout</button>
+            </form>
+        </div>
+
+    @endif
+
 </body>
 </html>
 

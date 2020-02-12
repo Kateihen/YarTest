@@ -13,16 +13,9 @@
         @if(Auth::check())
         <ul>
             <li><a href="/home">My Projects</a>
-            <li><a href="/projects/create">Create a New Project</a></li>
+            <li><a href="/projects">View All Projects</a>
+            <li><a href="/projects/create">Create A New Project</a></li>
         </ul>
-
-        <div>
-            <form action="/logout" method="POST">
-                @csrf
-                <button value="submit">Logout</button>
-            </form>
-        </div>
-
         @endif
 
         @if(!Auth::check())
