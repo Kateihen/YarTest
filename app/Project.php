@@ -7,8 +7,12 @@ use App\User;
 
 class Project extends Model
 {
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'creator');
-    }
+	protected $fillable = [
+		'project_name', 'creator', 'description',
+	];
+
+	public function creator()
+	{
+		return $this->belongsTo(User::class, 'creator', 'name');
+	}
 }

@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,7 +20,11 @@ class ProjectController extends Controller
 	 */
 	public function index()
 	{
-		//
+		$projects = Project::simplePaginate(15);
+
+		return view('projects.index', [
+			'projects' => $projects
+		]);
 	}
 
 	/**
@@ -24,7 +34,7 @@ class ProjectController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('projects.create');
 	}
 
 	/**
@@ -35,7 +45,11 @@ class ProjectController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
+		$attributes = $this->validateProject();
+
+		$project = Project::create($attributes);
+
+		return redirect('projects/' . $project->id);
 	}
 
 	/**
@@ -46,7 +60,7 @@ class ProjectController extends Controller
 	 */
 	public function show(Project $project)
 	{
-		//
+		dd($project);
 	}
 
 	/**
@@ -81,5 +95,14 @@ class ProjectController extends Controller
 	public function destroy(Project $project)
 	{
 		//
+	}
+
+	public function validateProject()
+	{
+		return \request()->validate([
+			'project_name' => ['required', 'min:3', 'max:255'],
+			'creator' => ['required', 'min:3', 'max:255'],
+			'description' => ['required', 'min:10']
+		]);
 	}
 }
