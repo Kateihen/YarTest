@@ -30,7 +30,7 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project)
     {
-        //
+        return $project->creator !== $user->name;
     }
 
     /**

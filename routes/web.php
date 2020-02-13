@@ -20,3 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('projects', 'ProjectController');
+
+Route::get('/projects/{id}/tasks/create', 'TaskController@create');
+Route::post('/projects/{id}/tasks', 'TaskController@store');
+Route::get('/projects/{id}/{status}', 'TaskController@index');
