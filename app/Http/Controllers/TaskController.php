@@ -11,7 +11,7 @@ class TaskController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware('auth');
+		$this->middleware('owner');
 	}
 
 	/**
@@ -21,10 +21,11 @@ class TaskController extends Controller
 	 */
 	public function index(Project $project)
 	{
-		dd(request());
-		
+		$project_id = request()->route('project_id');
 		$status =request()->route('status');
-		$tasks = Task::where('status', $status)->get();
+		$tasks = Task::where('status', $status)
+			->where('project_id', $project_id)
+			->get();
 		
 		return view('tasks.index', [
 			'status' => $status,
@@ -39,7 +40,7 @@ class TaskController extends Controller
 	 */
 	public function create()
 	{
-		$id = request()->route('id');
+		$id = request()->route('project_id');
 
 		$project = Project::find($id);
 
