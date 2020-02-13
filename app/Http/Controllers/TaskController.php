@@ -21,11 +21,10 @@ class TaskController extends Controller
 	 */
 	public function index(Project $project)
 	{
+		dd(request());
+		
 		$status =request()->route('status');
-
 		$tasks = Task::where('status', $status)->get();
-
-		$status = ucfirst($status);
 		
 		return view('tasks.index', [
 			'status' => $status,
@@ -88,9 +87,14 @@ class TaskController extends Controller
 	 * @param  \App\Task  $task
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Task $task)
+	public function show()
 	{
-		//
+		$task_id = request()->route('task_id');
+		$task = Task::find($task_id);
+
+		return view('tasks.show', [
+			'task' => $task
+		]);
 	}
 
 	/**
@@ -99,9 +103,14 @@ class TaskController extends Controller
 	 * @param  \App\Task  $task
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Task $task)
+	public function edit()
 	{
-		//
+		$task_id = request()->route('task_id');
+		$task = Task::find($task_id);
+
+		return view('tasks.edit', [
+			'task' => $task,
+		]);
 	}
 
 	/**
@@ -111,9 +120,16 @@ class TaskController extends Controller
 	 * @param  \App\Task  $task
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Task $task)
+	public function update(Request $request)
 	{
-		//
+		$attributes = $this->validateTask();
+
+		$task_id = request()->route('task_id');
+		$task = Task::find($task_id);
+
+		$task->update($attributes);
+
+		return redirect('/projects/'.$task->project_id.'/'.$task->status.'/'.$task->id);
 	}
 
 	/**
@@ -124,7 +140,13 @@ class TaskController extends Controller
 	 */
 	public function destroy(Task $task)
 	{
-		//
+		$task_id = request()->route('task_id');
+		$project_id = request()->route('project_id');
+		$task = Task::find($task_id);
+
+		$task->delete();
+
+		return redirect('/projects/'.$project_id);
 	}
 
 	public function validateTask()
