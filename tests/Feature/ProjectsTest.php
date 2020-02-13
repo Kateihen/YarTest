@@ -74,7 +74,7 @@ class ProjectsTest extends TestCase
             'description' => $testProject->description,
         ]);   
 
-        $response->assertRedirect('/projects/1');
+        $response->assertRedirect('/projects/4');
     }
 
     /** @test */
@@ -92,7 +92,7 @@ class ProjectsTest extends TestCase
             'description' => $testProject->description,
         ]);
         
-        $response = $this->actingAs($testUser)->get('/projects/2/edit');
+        $response = $this->actingAs($testUser)->get('/projects/6/edit');
 
         $response
             ->assertStatus(200)
@@ -115,7 +115,7 @@ class ProjectsTest extends TestCase
             'description' => $testProject1->description,
         ]);
 
-        $response = $this->actingAs($testUser2)->get('/projects/3/edit');
+        $response = $this->actingAs($testUser2)->get('/projects/9/edit');
 
         $response->assertStatus(403);
 
@@ -136,7 +136,7 @@ class ProjectsTest extends TestCase
             'description' => $testProject->description,
         ]);
         
-        $response = $this->actingAs($testUser)->delete('/projects/4');
+        $response = $this->actingAs($testUser)->delete('/projects/11');
 
         $response->assertRedirect('projects');
     }
@@ -157,7 +157,7 @@ class ProjectsTest extends TestCase
             'description' => $testProject1->description,
         ]);
 
-        $response = $this->actingAs($testUser2)->delete('/projects/5');
+        $response = $this->actingAs($testUser2)->delete('/projects/12');
 
         $response->assertStatus(403);
 
