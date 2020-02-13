@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\{User, Project};
+use App\{User, Project, Task};
 
 class ProjectSeeder extends Seeder
 {
@@ -12,9 +12,6 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        $users = factory(User::class, 10)->create()->each(function ($user) {
-            $user->projects()->save(factory(Project::class)->make());
-        });
-
+        factory(User::class, 10)->create();
     }
 }

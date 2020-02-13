@@ -8,15 +8,15 @@
     <h2>by {{ $project->creator }}</h2>
     <p>{{ $project->description }}</p>
 
-
-    @can('update', $project)
-        <a href="/projects/{{ $project->id }}/tasks/create">Add New Task</a>
-
         <ul><h3>Project Tasks:</h3>
             <li><a href="/projects/{{ $project->id }}/new">New</a><br></li>
             <li><a href="/projects/{{ $project->id }}/in_progress">In Progress</a><br></li>
             <li><a href="/projects/{{ $project->id }}/done">Done</a><br></li>
         </ul>
+
+    @can('update', $project)
+        <a href="/projects/{{ $project->id }}/tasks/create">Add New Task</a>
+
 
         <div>
             <a href="/projects/{{ $project->id }}/edit">Edit This Project</a>

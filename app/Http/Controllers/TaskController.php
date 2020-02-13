@@ -11,7 +11,9 @@ class TaskController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware('owner');
+		$this->middleware('owner', ['except' => [
+			'index',
+		]]);
 	}
 
 	/**
@@ -23,6 +25,7 @@ class TaskController extends Controller
 	{
 		$project_id = request()->route('project_id');
 		$status =request()->route('status');
+		
 		$tasks = Task::where('status', $status)
 			->where('project_id', $project_id)
 			->get();

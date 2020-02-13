@@ -8,17 +8,17 @@ use App\Task;
 
 class Project extends Model
 {
-    protected $fillable = [
-        'project_name', 'creator', 'description',
-    ];
+	protected $fillable = [
+		'project_name', 'creator', 'description',
+	];
 
-    public function creator()
-    {
-        return $this->belongsTo(User::class);
-    }
+	public function creator()
+	{
+		return $this->belongsTo(User::class);
+	}
 
-    public function tasks()
-    {
-        return $this->hasMany(Task::class);
-    }
+	public function tasks()
+	{
+		return $this->hasMany(Task::class);
+	}
 }
