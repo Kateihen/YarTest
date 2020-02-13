@@ -28,3 +28,4 @@ Route::get('/projects/{project_id}/{status}/{task_id}', 'TaskController@show');
 Route::get('/projects/{project_id}/tasks/{task_id}/edit', 'TaskController@edit');
 Route::patch('/projects/{project_id}/tasks/{task_id}', 'TaskController@update');
 Route::delete('/projects/{project_id}/tasks/{task_id}/delete', 'TaskController@destroy');
+Route::get('/projects/{project_id}/tasks/{task_id}/{filename}', 'TaskController@download');

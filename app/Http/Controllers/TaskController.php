@@ -159,4 +159,17 @@ class TaskController extends Controller
 			'status' => ['required'],
 		]);
 	}
+
+	public function download()
+	{
+		$filename = request()->route('filename');
+
+		$file_path = storage_path().'/app/public/'.$filename;
+
+		if (file_exists($file_path)) {
+			return Storage::download('public/'.$filename);
+		} else {
+			echo 'Sorry, file does not exist';
+		}
+	}
 }
